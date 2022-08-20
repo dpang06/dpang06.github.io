@@ -1,0 +1,10 @@
+canvas {
+    background-color: lightblue;
+    border: 1px solid cyan;
+}
+
+#speedDisplay {
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+}
