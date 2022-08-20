@@ -163,8 +163,8 @@ let SnakeGame = function (board, div, speed) {
             //
             while (me.turns.length > 0) {
                 let turn = me.turns.shift();
-                if (this.dir.next.has(turn)) {
-                    this.dir = turn;
+                if (me.dir.next.has(turn)) {
+                    me.dir = turn;
                     console.log("turn to " + turn.name);
                     break;
                 } else {
