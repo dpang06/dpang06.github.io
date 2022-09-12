@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Gomuku Game</title>
+        <script src="index.js"></script>
+        <script src="canvas.js"></script>
+        <script src="game.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body onload="init()">
+        <div id="wrapper">
+            <header></header>
+            <main>
+                <canvas id="board" width="800" height="800">
+                    Your browser does not support HTML 5
+                </canvas>
+            </main>
+            <aside id="panel">
+                <button id="take">Take!</button>
+                <button id="restart">Restart</button>
+                <p id="currentState"></p>
+                <p id="message"></p>
+            </aside>
+            <footer></footer>
+        </div>
+    </body>
+</html>
