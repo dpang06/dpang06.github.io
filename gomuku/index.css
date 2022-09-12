@@ -25,8 +25,9 @@ aside {
 }
 footer {
     grid-area: footer;
-    border: 1px blue solid;
+    /* border: 1px blue solid; */
     background-color: azure;
+    /* text-align: right; */
 }
 
 #board {
