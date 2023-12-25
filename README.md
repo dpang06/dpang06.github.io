@@ -1,3 +1,15 @@
+# Notes
+## Deployment
+- Deploy procedure
+    - Push to main after thoroughly tested the code
+    - `npm run deploy`
+    - The code is on `https://dpang06.github.io`
+
+- Reference: https://github.com/gitname/react-gh-pages
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
