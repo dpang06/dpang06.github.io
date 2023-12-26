@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react';
 import SnakeBoard from './SnakeBoard';
 import SnakeGame from './SnakeGame';
+import './SnakeComponent.css';
 
 const SnakeComponent = (props: object) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -47,17 +48,17 @@ const SnakeComponent = (props: object) => {
     return (
         <div>
             <div>
-                <canvas ref={canvasRef} id="board" width="600" height="600" tabIndex={1}>Your browser does not support HTML5 canvas</canvas>
+                <canvas ref={canvasRef} id="snakeBoardCanvas" width="600" height="600" tabIndex={1}>Your browser does not support HTML5 canvas</canvas>
             </div>
             <div>
-                <span>{state}</span><br />
+                <span id="snakeGameState">{state}</span><br />
 
-                <label htmlFor="gameDiv">Board Division:</label>
-                <input type="number" id="gameDiv" max="200" value={gameDiv} onChange={(ev) => setGameDiv(parseInt(ev.target.value))} /><br />
+                <label htmlFor="snakeBoardGameDiv">Board Division:</label>
+                <input type="number" id="snakeBoardGameDiv" max="200" value={gameDiv} onChange={(ev) => setGameDiv(parseInt(ev.target.value))} /><br />
 
-                <label htmlFor="gameSpeed">Speed:</label>
-                <input type="range" id="gameSpeed" min="1" max="30" value={gameSpeed} onChange={(ev) => setGameSpeed(parseInt(ev.target.value))} />
-                <span id="gameSpeedDisplay">{gameSpeed}</span>
+                <label htmlFor="snakeBoardGameSpeed">Speed:</label>
+                <input type="range" id="snakeBoardGameSpeed" min="1" max="30" value={gameSpeed} onChange={(ev) => setGameSpeed(parseInt(ev.target.value))} />
+                <span id="snakeBoardGameSpeedDisplay">{gameSpeed}</span>
                 <span>Grid Per Second</span><br />
 
                 <span id="boardInfo">Press R to start/restart</span>

@@ -1,14 +1,14 @@
-canvas {
+#snakeBoardCanvas {
     background-color: lightblue;
     border: 1px solid cyan;
 }
 
-#speedDisplay {
+#snakeGameSpeedDisplay {
     width: 30px;
     border: 1px solid black;
     display: inline-block;
 }
 
-#state {
+#snameGameState {
     font:bold;
 }

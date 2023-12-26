@@ -87,7 +87,12 @@ export default class SnakeGame {
         let head: Point, tail: Point;
         let dir = this.dir;
         let food = this.food;
+
+        // turn head
         head = this.arr[0];
+        this.board.clearPixel(head.x, head.y);
+        this.board.drawHead(head.x, head.y, dir);
+
         let next = { x: head.x + dir.x, y: head.y + dir.y };
         if (!this.isInside(next)) {
             return false;
@@ -122,9 +127,6 @@ export default class SnakeGame {
 
     turn(dir: Direction) {
         this.turns.push(dir);
-        let head = this.arr[0];
-        this.board.clearPixel(head.x, head.y);
-        this.board.drawHead(head.x, head.y, dir);
     };
 
     frame() {
