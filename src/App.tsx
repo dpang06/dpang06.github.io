@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SnakeComponent from './Components/Game/Snake/SnakeComponent';
+import GomukuComponent from './Components/Game/Gomuku/GomukuComponent';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           Learn React
         </a>
       </div>
-      <SnakeComponent/>
+      {/* <SnakeComponent/> */}
+      <GomukuComponent/>
     </div>
   );
 }

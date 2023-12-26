@@ -1,4 +1,4 @@
-#wrapper {
+#GomukuComponent {
     /* CSS grid set up */
     display: grid;
     grid-template:
@@ -11,26 +11,26 @@
     /* width: 100vw; */
 }
 
-header {
+#GomukuComponent header {
     grid-area: header;
     border: 1px blue solid;
     background-color: azure;
 }
-main {
+#GomukuComponent main {
     grid-area: main;
     /* background-color: azure; */
 }
-aside {
+#GomukuComponent aside {
     grid-area: aside;
 }
-footer {
+#GomukuComponent footer {
     grid-area: footer;
     /* border: 1px blue solid; */
     background-color: azure;
     /* text-align: right; */
 }
 
-#board {
+#GomukuComponent canvas {
     background-color: bisque;
 }
 
