@@ -1,0 +1,134 @@
+import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
+
+class SnakeBoard {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    w: number;
+    h: number;
+    constructor(canvas: HTMLCanvasElement, div: { x: number, y: number }) {
+        this.canvas = canvas;
+        let ctx = canvas.getContext('2d');
+        if (ctx == null) throw new Error('canvas context is null');
+        this.ctx = ctx;
+        this.w = this.canvas.width / div.x;
+        this.h = this.canvas.height / div.y;
+    }
+    clear() { this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); }
+    setGridDiv(div: { x: number, y: number }) {
+        this.w = this.canvas.width / div.x;
+        this.h = this.canvas.height / div.y;
+    };
+
+    //
+    drawPixel(x: number, y: number, color: string) {
+        let ctx = this.ctx;
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.fillRect(x * this.w, y * this.h, this.w, this.h);
+        ctx.restore();
+    };
+    clearPixel(x: number, y: number) {
+        this.ctx.clearRect(x * this.w, y * this.h, this.w, this.h);
+    };
+    drawHead(x: number, y: number) { this.drawPixel(x, y, "red"); };
+    drawBody(x: number, y: number) { this.drawPixel(x, y, "blue"); };
+    drawFood(x: number, y: number) { this.drawPixel(x, y, "green"); };
+
+    //
+    addEventListener(type: string, listener: EventListenerOrEventListenerObject, options: object) {
+        this.canvas.addEventListener(type, listener, options);
+    };
+    focus() { this.canvas.focus(); }
+}
+
+const SnakeComponentOld = (props: object) => {
+    const canvasRef = useRef(null);
+    const speedDisplay = useRef(null);
+    const speed = useRef(null);
+    // let speedDisplay = document.getElementById("speedDisplay");
+    // let speed = document.getElementById("boardSpeed");
+    // const canvas = canvasRef.current;
+    // const ctx = canvas.getContext("2d");
+    const init = (ctx: CanvasRenderingContext2D) => {
+        speedDisplay.innerHTML = speed.value;
+        speed.addEventListener('input', function (ev) {
+            // console.log(ev);
+            speedDisplay.innerHTML = speed.value;
+        });
+        speed.addEventListener('change', function (ev) { // to support some browsers like IE 10
+            // console.log(ev);
+            speedDisplay.innerHTML = speed.value;
+        });
+
+        board = new SnakeBoard(document.getElementById("board"));
+        board.addEventListener('keydown', function (ev) {
+            // console.log(ev);
+            ev.preventDefault();
+            let dirMap = {
+                "ArrowUp": UP,
+                "ArrowDown": DOWN,
+                "ArrowLeft": LEFT,
+                "ArrowRight": RIGHT,
+            };
+            if (ev.key in dirMap) {
+                game.turn(dirMap[ev.key]);
+                return;
+            }
+
+            let div = document.getElementById("boardDiv").value;
+            let speed = document.getElementById("boardSpeed").value;
+            if (ev.key === "r") {
+                if (game !== undefined) {
+                    game.stop();
+                }
+                game = new SnakeGame(board, { x: div, y: div }, speed);
+                game.start();
+            }
+        })
+        board.focus();
+    };
+
+    useEffect(() => {
+        const canvas = (canvasRef.current as unknown as HTMLCanvasElement);
+        const ctx = canvas.getContext('2d');
+        if (ctx === null) throw new Error('2d context not supported or canvas already initilized');
+
+        init(ctx);
+    }, [init]);
+
+    return (
+        <div>
+            <div>
+                <canvas ref={canvasRef} id="board" width="600" height="600" tabIndex={1}>Your browser does not support HTML5 canvas</canvas>
+            </div>
+            <div id="panel">
+                <span id="state">Start</span><br />
+                <label htmlFor="boardDiv">Board Division:</label><input type="number" id="boardDiv" value="20" max="200" /><br />
+
+                <label htmlFor="boardSpeed">Speed:</label>
+                <input type="range" id="boardSpeed" value="20" min="1" max="30" />
+                <span id="speedDisplay"></span>
+
+                <span>Grid Per Second</span><br />
+                <span id="info">Press R to start/restart</span>
+            </div>
+        </div>
+    );
+};
+
+const SnakeBoard = ({div}: {div:number}) => {
+    console.log(div);
+}
+
+const SnakeComponent = (props: object) => {
+    let canvas = 
+
+    return (
+        <div>
+        </div>
+    );
+}
+
+export default SnakeComponent;
+
