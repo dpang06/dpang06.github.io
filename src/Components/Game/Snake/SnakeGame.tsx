@@ -1,5 +1,5 @@
 import SnakeBoard from "./SnakeBoard";
-import {Point, Direction, UP, DOWN, LEFT, RIGHT} from "./util";
+import { Point, Direction, UP, DOWN, LEFT, RIGHT } from "./util";
 
 const keyToDir: { [key: string]: Direction } = {
     "ArrowUp": UP,
@@ -143,15 +143,12 @@ export default class SnakeGame {
         //
         // All have trade-offs, and there should be other more complex algorithms
         //
+        let turn: Direction|null = null;
         while (this.turns.length > 0) {
-            let turn: Direction = this.turns.shift()!;
-            if (this.dir.next?.has(turn)) {
-                this.dir = turn;
-                console.log("turn to " + turn.name);
-                // break;
-            } else {
-                console.log("skip turn to " + turn.name);
-            }
+            turn = this.turns.shift()!;
+        }
+        if (turn !== null && this.dir.next?.has(turn)) {
+            this.dir = turn;
         }
 
         //

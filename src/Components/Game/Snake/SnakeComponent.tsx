@@ -12,12 +12,8 @@ const SnakeComponent = (props: object) => {
     const [state, setState] = useState<string>("");
 
     // memoized, because we use this value only when "reset", not when the value changes
-    const gameDivActual = useMemo<number>(() => {
-        return gameDiv;
-    }, [gameDiv]);
-    const gameSpeedActual = useMemo<number>(() => {
-        return gameSpeed;
-    }, [gameSpeed]);
+    const gameDivActual = useMemo<number>(() => gameDiv, [gameDiv]);
+    const gameSpeedActual = useMemo<number>(() => gameSpeed, [gameSpeed]);
 
     useEffect(() => {
         if (board === null) {
@@ -61,7 +57,7 @@ const SnakeComponent = (props: object) => {
                 <span id="snakeBoardGameSpeedDisplay">{gameSpeed}</span>
                 <span>Grid Per Second</span><br />
 
-                <span id="boardInfo">Press R to start/restart</span>
+                <span id="snakeBoardInfo">Press R to start/restart</span>
             </div>
         </div>
     );
