@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import './TodoComponent.css';
 import { nanoid } from 'nanoid';
 import TodoList from './TodoList';
-import Form from './Form';
+import TodoForm from './TodoForm';
 import FilterButton from './FilterButton';
 
 const FILTER_MAP = {
@@ -153,8 +154,10 @@ function TodoComponent(props) {
         <span className="slider round"></span>
       </label>
       <h1>TodoMatic</h1>
-      <Form addTask={addTask}/>
-      <div><button id="clear-all-btn" onClick={clearAllTasks} className="btn btn__danger btn__lg">Clear All Tasks</button></div>
+      <TodoForm addTask={addTask}/>
+      <div>
+        <Button id="clear-all-btn" onClick={clearAllTasks} variant="danger" size="lg" >Clear All Tasks</Button>
+      </div>
       <div className="filters btn-group stack-exception">
         {filterList}
       </div>

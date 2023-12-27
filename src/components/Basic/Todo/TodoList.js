@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
 
 function usePrevious(value) {
   const ref = useRef();
@@ -46,53 +48,49 @@ function TodoList(props) {
         />
       </div>
       <div className="btn-group">
-        <button type="button" className="btn todo-cancel" onClick={() => setEditing(false)}>
+        <Button type="button" className="todo-cancel" onClick={() => setEditing(false)}>
           Cancel
           <span className="visually-hidden">renaming {props.name}</span>
-        </button>
-        <button type="submit" className="btn btn__primary todo-edit">
+        </Button>
+        <Button type="submit" variant="primary" className="todo-edit">
           Save
           <span className="visually-hidden">new name for {props.name}</span>
-        </button>
+        </Button>
       </div>
     </form>
   );
   const viewTemplate = (
     <div className="stack-small">
-      <div className="c-cb">
-        <input
+      <Form.Group className="c-cb">
+        <Form.Check
           id={props.id}
           type="checkbox"
           defaultChecked={props.completed}
           onChange={() => props.toggleTaskCompleted(props.id)}
+          label={props.name}
         />
-        <label className="todo-label" htmlFor={props.id}>
-          {props.name}
-        </label>
-      </div>
+      </Form.Group>
       <div className="btn-group">
-        <button
+        <Button
           type="button"
-          className="btn"
           onClick={() => setEditing(true)}
           ref={editButtonRef}
         >
           Edit <span className="visually-hidden">{props.name}</span>
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="btn btn__danger"
+          variant="danger"
           onClick={() => props.deleteTask(props.id)}
         >
           Delete <span className="visually-hidden">{props.name}</span>
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="btn"
           onClick={() => props.markImportantTask(props.id)}
         >
           Important <span className="visually-hidden">{props.name}</span>
-        </button>
+        </Button>
       </div>
     </div>
   );
