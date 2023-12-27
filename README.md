@@ -1,9 +1,9 @@
 # Notes
 ## Deployment
 - Deploy procedure
-    - Push to main after thoroughly tested the code
+    - Push `main` after thoroughly tested the code
     - `npm run deploy`
-    - The code is on `https://dpang06.github.io`
+    - The website is on `https://dpang06.github.io`, automatically bound to `gh-pages`
 
 - Reference: https://github.com/gitname/react-gh-pages
 
