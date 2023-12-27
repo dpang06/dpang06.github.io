@@ -3,7 +3,7 @@
 - Deploy procedure
     - Push `main` after thoroughly tested the code
     - `npm run deploy`
-    - The website is on `https://dpang06.github.io`, automatically bound to `gh-pages`
+    - The website is now on `https://dpang06.github.io`, deployed from `gh-pages`
 
 - Reference: https://github.com/gitname/react-gh-pages
 
