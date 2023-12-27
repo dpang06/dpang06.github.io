@@ -34,6 +34,10 @@
     background-color: bisque;
 }
 
-#panel {
+#GomukuComponent .panel {
     background-color: azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

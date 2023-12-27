@@ -3,6 +3,25 @@ import GomukuBoard from './GomukuBoard';
 import GomukuGame, { GameState, Input, InputType, MoveHandlerOutput, Phase } from './GomukuGame';
 import { Player, Stone, flipStone } from './util';
 import './GomukuComponent.css';
+import { Button } from 'react-bootstrap';
+
+const gameStateMessage = (state: GameState) => {
+  let player = state.currentPlayer === Player.A ? "A" : "B";
+  let stone = state.currentStone === Stone.BLACK ? "Black" : "White";
+  let message;
+  if (state.phase === Phase.OPEN && !state.isFirstOpenMove) {
+    let otherStone = flipStone(state.currentStone) === Stone.BLACK ? "Black" : "White";
+    message = `Player ${player} to go; Take ${otherStone} or Play ${stone}`;
+  } else if (state.phase === Phase.OPEN || state.phase === Phase.PLAY) {
+    message = `Player ${player} to go; Play ${stone}`;
+  } else if (state.phase === Phase.END) {
+    let winner = state.winner === Player.A ? "A" : "B";
+    message = `Player ${winner} wins!`;
+  } else {
+    message = "???";
+  }
+  return message;
+};
 
 const N = 15;
 const K = 5;
@@ -12,24 +31,6 @@ const GomukuComponent = () => {
   const [game, setGame] = useState<GomukuGame | null>(null);
   const [gameFlow, setGameFlow] = useState<Generator<MoveHandlerOutput | undefined, void, Input> | null>(null);
   const [message, setMessage] = useState("");
-
-  const gameStateMessage = useCallback((state: GameState) => {
-    let player = state.currentPlayer === Player.A ? "A" : "B";
-    let stone = state.currentStone === Stone.BLACK ? "Black" : "White";
-    let message;
-    if (state.phase === Phase.OPEN && !state.isFirstOpenMove) {
-      let otherStone = flipStone(state.currentStone) === Stone.BLACK ? "Black" : "White";
-      message = `Player ${player} to go; Take ${otherStone} or Play ${stone}`;
-    } else if (state.phase === Phase.OPEN || state.phase === Phase.PLAY) {
-      message = `Player ${player} to go; Play ${stone}`;
-    } else if (state.phase === Phase.END) {
-      let winner = state.winner === Player.A ? "A" : "B";
-      message = `Player ${winner} wins!`;
-    } else {
-      message = "???";
-    }
-    return message;
-  }, []);
 
   const onUserPlay = useCallback((
     board: GomukuBoard, game: GomukuGame, gameFlow: Generator<MoveHandlerOutput | undefined, void, Input>,
@@ -52,7 +53,7 @@ const GomukuComponent = () => {
     board.drawStone({ x: i, y: j }, output.stone! === Stone.BLACK ? "black" : "white");
     gameFlow.next(); // continue game flow
     setMessage(gameStateMessage(game.state));
-  }, [gameStateMessage]);
+  }, []);
 
   const onUserTake = useCallback((
     board: GomukuBoard | null, game: GomukuGame | null, gameFlow: Generator<MoveHandlerOutput | undefined, void, Input> | null,
@@ -73,7 +74,7 @@ const GomukuComponent = () => {
 
     gameFlow.next(); // continue game flow
     setMessage(gameStateMessage(game.state));
-  }, [gameStateMessage]);
+  }, []);
 
   const onUserRestart = (board: GomukuBoard | null) => {
     setMessage("");
@@ -93,14 +94,12 @@ const GomukuComponent = () => {
 
   useEffect(() => {
     if (game === null) {
-      let g = new GomukuGame(N, K);
-      setGame(g);
+      setGame(new GomukuGame(N, K));
     }
   }, [game]);
 
   useEffect(() => {
-    if (board === null) return;
-    if (game === null) return;
+    if (!board || !game) return;
     if (gameFlow === null) {
       let gameFlow = game.start();
       gameFlow.next(); // skip first input
@@ -118,7 +117,7 @@ const GomukuComponent = () => {
       });
       setMessage(gameStateMessage(game.state));
     }
-  }, [board, game, gameFlow, gameStateMessage, onUserPlay]);
+  }, [board, game, gameFlow, onUserPlay]);
 
   return (
     <div id="GomukuComponent">
@@ -128,10 +127,11 @@ const GomukuComponent = () => {
           Your browser does not support HTML 5
         </canvas>
       </main>
-      <aside id="panel">
-        <button onClick={(ev) => onUserTake(board, game, gameFlow)}>Take!</button>
-        <button onClick={(ev) => onUserRestart(board)}>Restart</button>
-        <p></p>
+      <aside className="panel">
+        <div>
+          <Button onClick={(ev) => onUserTake(board, game, gameFlow)}>Take!</Button>
+          <Button onClick={(ev) => onUserRestart(board)}>Restart</Button>
+        </div>
         <p>{message}</p>
       </aside>
       <footer>

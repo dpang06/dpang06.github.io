@@ -19,9 +19,6 @@ const SnakeComponent = (props: object) => {
         if (board === null) {
             const canvas = canvasRef.current;
             if (canvas == null) return; // component is unmounted
-            const ctx = canvas?.getContext('2d');
-            if (ctx === null) throw new Error('2d context not supported or canvas already initilized');
-
             setBoard(new SnakeBoard(canvas));
         }
     }, [board]);
