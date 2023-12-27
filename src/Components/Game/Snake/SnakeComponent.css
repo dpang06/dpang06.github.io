@@ -1,0 +1,14 @@
+#snakeBoardCanvas {
+    background-color: lightblue;
+    border: 1px solid cyan;
+}
+
+#snakeGameSpeedDisplay {
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+#snakeGameState {
+    font:bold;
+}

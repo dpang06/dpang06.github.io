@@ -1,0 +1,43 @@
+#GomukuComponent {
+    /* CSS grid set up */
+    display: grid;
+    grid-template:
+        'header header' auto
+        'main aside' 800px
+        'footer footer' auto /
+        800px auto
+        ;
+    /* height: 100vh; */
+    /* width: 100vw; */
+}
+
+#GomukuComponent header {
+    grid-area: header;
+    border: 1px blue solid;
+    background-color: azure;
+}
+#GomukuComponent main {
+    grid-area: main;
+    /* background-color: azure; */
+}
+#GomukuComponent aside {
+    grid-area: aside;
+}
+#GomukuComponent footer {
+    grid-area: footer;
+    /* border: 1px blue solid; */
+    background-color: azure;
+    /* text-align: right; */
+}
+
+#GomukuComponent canvas {
+    background-color: bisque;
+}
+
+#GomukuComponent .panel {
+    background-color: azure;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
