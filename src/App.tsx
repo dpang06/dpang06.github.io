@@ -4,8 +4,9 @@ import { Route, Routes, MemoryRouter } from 'react-router-dom';
 import SnakeComponent from './components/Game/Snake/SnakeComponent';
 import GomukuComponent from './components/Game/Gomuku/GomukuComponent';
 import { HomePage } from './components/HomePage';
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import TodoComponent from './components/Basic/Todo/TodoComponent';
 
 function App() {
   return (
@@ -18,16 +19,26 @@ function App() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link as={Link} to="/gomuku">Gomuku Game</Nav.Link>
-                <Nav.Link as={Link} to="/snake">Snake Game</Nav.Link>
+                <NavDropdown title="Basic" id="basic-nav-dropdown">
+                  <NavDropdown.Item as={Link} to="/basic/todo">TodoMatic</NavDropdown.Item>
+                </NavDropdown>
+                <NavDropdown title="Game" id="game-nav-dropdown">
+                  <NavDropdown.Item as={Link} to="/game/gomuku">Gomuku Game</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/game/snake">Snake Game</NavDropdown.Item>
+                </NavDropdown>
               </Nav>
             </Navbar.Collapse>
           </Container>
         </Navbar>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/gomuku" element={<GomukuComponent />} />
-          <Route path="/snake" element={<SnakeComponent />} />
+          <Route path="/basic/">
+            <Route path="todo" element={<TodoComponent />} />
+          </Route>
+          <Route path="/game/">
+            <Route path="gomuku" element={<GomukuComponent />} />
+            <Route path="snake" element={<SnakeComponent />} />
+          </Route>
         </Routes>
       </div>
     </MemoryRouter>
