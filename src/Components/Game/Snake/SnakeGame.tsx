@@ -3,9 +3,13 @@ import { Point, Direction, UP, DOWN, LEFT, RIGHT } from "./util";
 
 const keyToDir: { [key: string]: Direction } = {
     "ArrowUp": UP,
-    "ArrowDown": DOWN,
     "ArrowLeft": LEFT,
+    "ArrowDown": DOWN,
     "ArrowRight": RIGHT,
+    "w": UP,
+    "a": LEFT,
+    "s": DOWN,
+    "d": RIGHT,
 };
 
 export default class SnakeGame {
