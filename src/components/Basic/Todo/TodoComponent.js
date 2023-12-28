@@ -21,13 +21,10 @@ function usePrevious(value) {
   return ref.current;
 }
 
-const LIGHT_THEME = "theme_light";
-const DARK_THEME = "theme_dark";
 
 function TodoComponent(props) {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("All");
-  const [theme, setTheme] = useState(LIGHT_THEME);
   const listHeadingRef = useRef(null);
   const prevTaskLength = usePrevious(tasks.length);
 
@@ -80,16 +77,6 @@ function TodoComponent(props) {
     setTasks([]);
   }
 
-  function toggleTheme(e) {
-    let newTheme;
-    if (e.currentTarget.checked === true) {
-      newTheme = DARK_THEME;
-    } else {
-      newTheme = LIGHT_THEME;
-    }
-    setTheme(newTheme);
-  }
-
   const taskList = tasks
   .filter(FILTER_MAP[filter])
   .map((task) => (
@@ -136,23 +123,9 @@ function TodoComponent(props) {
     localStorage.setItem('listOfTasks', JSON.stringify(tasks));
   });
 
-  // persist theme
-  useEffect(() => {
-    const initTheme = localStorage.getItem('theme') ?? LIGHT_THEME;
-    setTheme(initTheme);
-  }, []);
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-  });
-
   let className = "todoapp stack-large";
-  className += ` ${theme}`;
   return (
     <div className={className}>
-      <label id="theme-switcher" className="switch">
-        <input type="checkbox" onChange={toggleTheme} checked={theme === DARK_THEME} />
-        <span className="slider round"></span>
-      </label>
       <h1>TodoMatic</h1>
       <TodoForm addTask={addTask}/>
       <div>

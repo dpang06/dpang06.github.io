@@ -37,18 +37,22 @@
   }
 } */
 
-.App {
-  height: 100%;
-  display: grid;
-  grid-template:
-    "nav" auto
-    "main" 1fr;
+/**
+Change background color of react bootstrap switch
+https://stackoverflow.com/questions/60312146/how-to-change-the-background-color-of-react-bootstraps-switch-part-of-the-form
+*/
+.theme-switch input:not(:checked) {
+    background-color: white;
 }
 
+.theme-switch input:checked {
+    background-color: black;
+}
 /**
 Custom switch (For theme switcher)
 See: https://www.w3schools.com/howto/howto_css_switch.asp
 **/
+/*
 .switch {
   position: relative;
   display: inline-block;
@@ -95,4 +99,4 @@ See: https://www.w3schools.com/howto/howto_css_switch.asp
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
+} */
